@@ -13,6 +13,10 @@ const router = new Router({
         name: 'login',
         component: login
     }, {
+        path: '/login',
+        name: 'login',
+        component: login
+    }, {
         path: '/home',
         name: 'home',
         component: home
@@ -21,11 +25,11 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     //if (to.matched.some(res => res.meta.requireAuth)) { // 验证是否需要登陆
-    if (localStorage.getItem('token')) { // 查询本地存储信息是否已经登陆,判断键是否存在
+    /* if (localStorage.getItem('token')) { // 查询本地存储信息是否已经登陆,判断键是否存在
         if (to.name == 'login' && from.name != 'login') {
-            /* next({
+            next({
                 path: from.fullPath
-            }); */
+            });
         }
         next();
     } else {
@@ -40,7 +44,8 @@ router.beforeEach((to, from, next) => {
                 })
             }
         });
-    }
+    } */
+    next();
     /* } else {
         next();
     } */

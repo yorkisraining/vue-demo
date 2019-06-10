@@ -26,13 +26,9 @@ baseURL = baseHost;
 //baseURL = environment.koa;
 
 // 接口集合
-const apiUrl = {
+export const apiUrl = {
     // 登录
     login: baseURL + 'auth/login',
     //table
     table: baseURL + 'page/getAllPage',
-}
-
-export {
-    apiUrl
 }

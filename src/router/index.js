@@ -23,32 +23,28 @@ const router = new Router({
     }]
 })
 
+let vm = new Vue();
 router.beforeEach((to, from, next) => {
-    //if (to.matched.some(res => res.meta.requireAuth)) { // 验证是否需要登陆
-    /* if (localStorage.getItem('token')) { // 查询本地存储信息是否已经登陆,判断键是否存在
-        if (to.name == 'login' && from.name != 'login') {
-            next({
-                path: from.fullPath
+    //如果要去login的，不判断，直接过去，其他的都得先判断是否登录，没有登录则跳转到login
+    if (to.name != 'login') {
+        if (localStorage.getItem('token')) { // 查询本地存储信息是否已经登陆,判断键是否存在
+            next();
+        } else {
+            vm.$Message.warning({
+                content: '您还未登录，请先登录!',
+                onClose: () => {
+                    next({
+                        path: '/login', // 未登录则跳转至login页面
+                        /* query: {
+                            redirect: from.fullPath
+                        } // 登陆成功后回到当前页面，这里传值给login页面，to.fullPath为当前点击的页面 */
+                    })
+                }
             });
         }
-        next();
     } else {
-        this.$Message.warning({
-            content: '您还未登录，请先登录!',
-            onClose: () => {
-                next({
-                    path: '/login', // 未登录则跳转至login页面
-                    query: {
-                        redirect: from.fullPath
-                    } // 登陆成功后回到当前页面，这里传值给login页面，to.fullPath为当前点击的页面
-                })
-            }
-        });
-    } */
-    next();
-    /* } else {
         next();
-    } */
+    }
 })
 
 export default router

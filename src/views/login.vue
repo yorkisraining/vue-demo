@@ -43,7 +43,9 @@ export default {
                     });
                 }
             }, () => {
-
+                    this.$Message.warning({
+                        content: '服务器错误！'
+                    });
             })
         }
     }
